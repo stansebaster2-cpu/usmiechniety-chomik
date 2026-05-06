@@ -109,9 +109,13 @@ public class Strings : INotifyPropertyChanged
         "This software is fully open-source and free. You may freely use, modify and distribute it — including for commercial purposes — as long as the license and author notice is preserved.\n\nThis program was created out of care for hamster welfare and the belief that a properly sized, well-designed wheel can genuinely extend your hamster's life and protect its spine health. We are building awareness — a good wheel is not a luxury, it is every hamster's need.\n\nCopyright © 2026 Sebastian Stańczykowski");
     public string AboutGithubLabel   => T("Kod źródłowy (GitHub)", "Source code (GitHub)");
     public string AboutGithubUrl     => "https://github.com/stansebaster2-cpu/usmiechniety-chomik";
-    public string AboutBuyMeACoffee  => T("Wesprzyj projekt", "Support the project");
-    public string AboutBuyMeACoffeeUrl => "https://buymeacoffee.com/stansebaster";
-    public string AboutPhotoCaption  => T("Mój chomik 🐹", "My hamster 🐹");
+    public string AboutBlikLabel     => T("Wesprzyj projekt — BLIK", "Support the project — BLIK");
+    public string AboutBlikNumber    => "505 899 450";
+    public string AboutBlikCopy      => T("📋 Kopiuj numer", "📋 Copy number");
+    public string AboutBlikCopied    => T("✓ Skopiowano!", "✓ Copied!");
+    public string AboutBlikHint      => T("Otwórz aplikację bankową → BLIK → Przelew na telefon",
+                                          "Open your banking app → BLIK → Transfer to phone");
+    public string AboutPhotoCaption  => T("Zosia 🐹", "Zosia 🐹");
     public string AboutClaude        => T(
         "Stworzony przy pomocy Claude (Anthropic) — asystenta AI, który pomógł w projektowaniu i implementacji.",
         "Built with the help of Claude (Anthropic) — an AI assistant that helped design and implement this app.");

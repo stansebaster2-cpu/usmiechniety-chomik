@@ -52,6 +52,7 @@
     <Compile Include="Services\DonationService.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Resource Include="chomik.ico" />
+    <None Include="Assets\**" CopyToOutputDirectory="PreserveNewest"/>
     <ApplicationDefinition Include="App.xaml" />
     <Page Include="MainWindow.xaml" />
     <Page Include="Dialogs\AboutDialog.xaml" />

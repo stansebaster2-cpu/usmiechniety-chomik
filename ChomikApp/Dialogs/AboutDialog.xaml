@@ -7,7 +7,7 @@
         Width="500" SizeToContent="Height"
         WindowStartupLocation="CenterOwner"
         ResizeMode="NoResize">
-    <ScrollViewer VerticalScrollBarVisibility="Auto" MaxHeight="760">
+    <ScrollViewer VerticalScrollBarVisibility="Auto" MaxHeight="800">
         <StackPanel Margin="32,28,32,28">
 
             <!-- Logo + tytuł -->
@@ -34,21 +34,33 @@
                        FontSize="15" FontWeight="SemiBold"
                        Margin="0,0,0,16"/>
 
-            <!-- Zdjęcie chomika (placeholder) -->
-            <Border Background="{DynamicResource SystemControlBackgroundChromeMediumBrush}"
-                    CornerRadius="8" Height="180" Margin="0,0,0,6"
-                    x:Name="PhotoBorder">
-                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-                    <TextBlock Text="🐹" FontSize="48" HorizontalAlignment="Center"/>
-                    <TextBlock Text="{Binding Source={x:Static loc:Strings.Current}, Path=AboutPhotoCaption}"
-                               FontSize="12" HorizontalAlignment="Center" Margin="0,6,0,0"
-                               Foreground="{DynamicResource SystemControlForegroundBaseMediumBrush}"/>
-                </StackPanel>
+            <!-- Zdjęcie Zosi -->
+            <Border CornerRadius="10" ClipToBounds="True"
+                    Height="220" Margin="0,0,0,6">
+                <Grid>
+                    <!-- Placeholder gdy brak zdjęcia -->
+                    <Border x:Name="PhotoPlaceholder"
+                            Background="{DynamicResource SystemControlBackgroundChromeMediumBrush}">
+                        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                            <TextBlock Text="🐹" FontSize="48" HorizontalAlignment="Center"/>
+                            <TextBlock Text="{Binding Source={x:Static loc:Strings.Current}, Path=AboutPhotoCaption}"
+                                       FontSize="12" HorizontalAlignment="Center" Margin="0,6,0,0"
+                                       Foreground="{DynamicResource SystemControlForegroundBaseMediumBrush}"/>
+                        </StackPanel>
+                    </Border>
+                    <!-- Właściwe zdjęcie -->
+                    <Image x:Name="ZosiaPhoto"
+                           Stretch="UniformToFill"
+                           Visibility="Collapsed"/>
+                </Grid>
             </Border>
-            <TextBlock FontSize="10" HorizontalAlignment="Center"
-                       Foreground="{DynamicResource SystemControlForegroundBaseLowBrush}"
+            <TextBlock x:Name="PhotoCaption"
+                       Text="{Binding Source={x:Static loc:Strings.Current}, Path=AboutPhotoCaption}"
+                       FontSize="12" HorizontalAlignment="Center"
+                       FontStyle="Italic"
+                       Foreground="{DynamicResource SystemControlForegroundBaseMediumBrush}"
                        Margin="0,0,0,16"
-                       Text="(zdjęcie zostanie dodane wkrótce / photo coming soon)"/>
+                       Visibility="Collapsed"/>
 
             <!-- Licencja -->
             <Border Background="{DynamicResource SystemControlBackgroundChromeMediumBrush}"
@@ -79,29 +91,36 @@
                 </StackPanel>
             </Border>
 
-            <!-- Buy Me a Coffee -->
-            <Border Background="{DynamicResource SystemControlBackgroundChromeMediumBrush}"
-                    CornerRadius="6" Padding="14,10" Margin="0,0,0,12">
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="☕ " FontSize="13" VerticalAlignment="Center"/>
-                    <TextBlock Text="{Binding Source={x:Static loc:Strings.Current}, Path=AboutBuyMeACoffee}"
-                               FontSize="12" VerticalAlignment="Center" Margin="0,0,8,0"/>
-                    <TextBlock x:Name="CoffeeLink"
-                               FontSize="12" VerticalAlignment="Center"
-                               Foreground="{StaticResource ChomikOrangeBrush}"
-                               Cursor="Hand"
-                               MouseLeftButtonUp="CoffeeLink_Click"
-                               TextDecorations="Underline"
-                               Text="{Binding Source={x:Static loc:Strings.Current}, Path=AboutBuyMeACoffeeUrl}"/>
+            <!-- BLIK -->
+            <Border Background="#E8F5E9" CornerRadius="6" Padding="14,12" Margin="0,0,0,12"
+                    BorderBrush="#A5D6A7" BorderThickness="1">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,6">
+                        <TextBlock Text="💚 " FontSize="14" VerticalAlignment="Center"/>
+                        <TextBlock Text="{Binding Source={x:Static loc:Strings.Current}, Path=AboutBlikLabel}"
+                                   FontSize="13" FontWeight="SemiBold" VerticalAlignment="Center"
+                                   Foreground="#2E7D32"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,6">
+                        <TextBlock Text="{Binding Source={x:Static loc:Strings.Current}, Path=AboutBlikNumber}"
+                                   FontSize="22" FontWeight="Bold" FontFamily="Consolas"
+                                   Foreground="#1B5E20" VerticalAlignment="Center"
+                                   Margin="0,0,12,0"/>
+                        <Button x:Name="BtnCopyBlik"
+                                Content="{Binding Source={x:Static loc:Strings.Current}, Path=AboutBlikCopy}"
+                                Click="BtnCopyBlik_Click"
+                                Padding="10,4" FontSize="11"
+                                VerticalAlignment="Center"/>
+                    </StackPanel>
+                    <TextBlock Text="{Binding Source={x:Static loc:Strings.Current}, Path=AboutBlikHint}"
+                               FontSize="11" Foreground="#388E3C" FontStyle="Italic"/>
                 </StackPanel>
             </Border>
 
             <!-- Claude -->
             <Border CornerRadius="6" Padding="14,10" Margin="0,0,0,16"
-                    BorderBrush="#E0C87A" BorderThickness="1">
-                <Border.Background>
-                    <SolidColorBrush Color="#FFF8E1"/>
-                </Border.Background>
+                    BorderBrush="#E0C87A" BorderThickness="1"
+                    Background="#FFF8E1">
                 <DockPanel>
                     <TextBlock DockPanel.Dock="Left" Text="✨" FontSize="16"
                                VerticalAlignment="Top" Margin="0,1,10,0"/>
