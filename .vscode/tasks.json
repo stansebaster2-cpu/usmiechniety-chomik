@@ -1,0 +1,95 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build: all",
+            "type": "shell",
+            "command": "dotnet build UsmiechnietyCHomik.sln --configuration Debug",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "build: Release",
+            "type": "shell",
+            "command": "dotnet build UsmiechnietyCHomik.sln --configuration Release",
+            "group": "build",
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "build: ChomikApp only",
+            "type": "shell",
+            "command": "dotnet build ChomikApp/ChomikApp.csproj",
+            "group": "build",
+            "problemMatcher": "$msCompile"
+        },
+{
+            "label": "test: all",
+            "type": "shell",
+            "command": "dotnet test UsmiechnietyCHomik.sln --logger trx",
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "clean: bin & obj",
+            "type": "shell",
+            "command": "Get-ChildItem -Recurse -Include bin,obj | Remove-Item -Recurse -Force",
+            "options": {
+                "shell": {
+                    "executable": "powershell",
+                    "args": [
+                        "-NoProfile",
+                        "-Command"
+                    ]
+                }
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "openscad: render kolo_chomika (fn=200)",
+            "type": "shell",
+            "command": "openscad -o exports/kolo_chomika.stl --render -D \"$fn=200\" openscad/kolo_chomika.scad",
+            "group": "build",
+            "problemMatcher": []
+        },
+        {
+            "label": "openscad: render podstawa_chomika (fn=200)",
+            "type": "shell",
+            "command": "openscad -o exports/podstawa_chomika.stl --render -D \"$fn=200\" openscad/podstawa_chomika.scad",
+            "group": "build",
+            "problemMatcher": []
+        },
+        {
+            "label": "openscad: render TEST gniazdo lozyska (fn=64)",
+            "type": "shell",
+            "command": "openscad -o exports/test_loz.stl --render -D \"$fn=64\" -D \"loz_D=13.1\" openscad/podstawa_chomika.scad",
+            "group": "build",
+            "problemMatcher": []
+        },
+        {
+            "label": "openscad: render wszystkie STL",
+            "dependsOn": [
+                "openscad: render kolo_chomika (fn=200)",
+                "openscad: render podstawa_chomika (fn=200)"
+            ],
+            "dependsOrder": "sequence",
+            "problemMatcher": []
+        },
+        {
+            "label": "publish: ChomikApp self-contained",
+            "type": "shell",
+            "command": "dotnet publish ChomikApp/ChomikApp.csproj -c Release -r win-x64 --self-contained true -o publish/ChomikApp",
+            "group": "build",
+            "problemMatcher": "$msCompile"
+        },
+    ]
+}

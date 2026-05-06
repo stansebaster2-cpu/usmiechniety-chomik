@@ -1,0 +1,20 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "ChomikApp (Debug)",
+            "type": "dotnet",
+            "request": "launch",
+            "projectPath": "${workspaceFolder}/ChomikApp/ChomikApp.csproj",
+            "env": {
+                "CHOMIK_LOG_LEVEL": "Debug",
+                "CHOMIK_WHEEL_DIAMETER": "235"
+            }
+        },
+{
+            "name": "Attach to process",
+            "type": "dotnet",
+            "request": "attach"
+        }
+    ]
+}

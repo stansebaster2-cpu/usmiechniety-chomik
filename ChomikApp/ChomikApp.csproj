@@ -1,0 +1,71 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <Platforms>x64</Platforms>
+    <RootNamespace>ChomikApp</RootNamespace>
+    <AssemblyName>UsmiechnietyCHomik</AssemblyName>
+    <ApplicationIcon>chomik.ico</ApplicationIcon>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <EnableDefaultPageItems>false</EnableDefaultPageItems>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="App.xaml.cs" />
+    <Compile Include="AssemblyInfo.cs" />
+<Compile Include="Data\BearingDatabase.cs" />
+    <Compile Include="Data\HamsterSpecies.cs" />
+    <Compile Include="Data\SpeciesDatabase.cs" />
+    <Compile Include="Data\VSlotProfile.cs" />
+    <Compile Include="Design\BaseDesigner.cs" />
+    <Compile Include="Design\OneDecimalFormatter.cs" />
+    <Compile Include="Design\BearingCatalog.cs" />
+    <Compile Include="Design\BearingSelector.cs" />
+    <Compile Include="Design\HamsterHealthCalc.cs" />
+    <Compile Include="Dialogs\AboutDialog.xaml.cs" />
+    <Compile Include="Dialogs\SpeciesPickerDialog.xaml.cs" />
+    <Compile Include="Direct3D11RenderControl.cs" />
+    <Compile Include="Export\ExportFormat.cs" />
+    <Compile Include="Export\ModelExporter.cs" />
+    <Compile Include="Export\ObjExporter.cs" />
+    <Compile Include="Export\PlyExporter.cs" />
+    <Compile Include="Export\StlExporter.cs" />
+    <Compile Include="Geometry\BaseGenerator.cs" />
+    <Compile Include="Geometry\Primitives.cs" />
+    <Compile Include="Geometry\StlImporter.cs" />
+    <Compile Include="Geometry\WheelGenerator.cs" />
+    <Compile Include="Localization\Strings.cs" />
+    <Compile Include="MainWindow.xaml.cs" />
+    <Compile Include="Models\Mesh.cs" />
+    <Compile Include="Models\Vector3.cs" />
+    <Compile Include="Parameters\BaseParameters.cs" />
+    <Compile Include="Parameters\ChomikPreset.cs" />
+    <Compile Include="Parameters\PrinterParameters.cs" />
+    <Compile Include="Parameters\WheelParameters.cs" />
+    <Compile Include="Services\DonationService.cs" />
+    <Compile Include="ViewModels\MainViewModel.cs" />
+    <Resource Include="chomik.ico" />
+    <ApplicationDefinition Include="App.xaml" />
+    <Page Include="MainWindow.xaml" />
+    <Page Include="Dialogs\AboutDialog.xaml" />
+    <Page Include="Dialogs\SpeciesPickerDialog.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.2" />
+    <PackageReference Include="ModernWpfUI" Version="0.9.6" />
+    <PackageReference Include="Serilog.Sinks.Debug" Version="3.0.0" />
+    <PackageReference Include="Serilog.Sinks.File" Version="7.0.0" />
+<PackageReference Include="Vortice.D3DCompiler" Version="3.8.3" />
+    <PackageReference Include="Vortice.Direct3D11" Version="3.8.3" />
+    <PackageReference Include="Vortice.DXGI" Version="3.8.3" />
+    <PackageReference Include="Vortice.Mathematics" Version="2.1.1" />
+  </ItemGroup>
+</Project>

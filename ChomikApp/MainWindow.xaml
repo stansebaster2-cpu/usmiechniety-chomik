@@ -1,0 +1,549 @@
+<Window x:Class="ChomikApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ui="http://schemas.modernwpf.com/2019"
+        xmlns:vm="clr-namespace:ChomikApp.ViewModels"
+        xmlns:loc="clr-namespace:ChomikApp.Localization"
+        xmlns:design="clr-namespace:ChomikApp.Design"
+        mc:Ignorable="d"
+        ui:WindowHelper.UseModernWindowStyle="True"
+        Title="Uśmiechnięty Chomik"
+        Icon="chomik.ico"
+        Height="820"
+        Width="1360"
+        MinWidth="1100"
+        MinHeight="640"
+        Loaded="Window_Loaded">
+    <Window.DataContext>
+        <vm:MainViewModel/>
+    </Window.DataContext>
+    <Window.Resources>
+        <loc:Strings x:Key="L"/>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0"
+                Background="{StaticResource ChomikOrangeBrush}"
+                Padding="10,6">
+            <DockPanel>
+                <StackPanel DockPanel.Dock="Left"
+                        Orientation="Horizontal"
+                        VerticalAlignment="Center">
+                    <TextBlock Text="🐹"
+                            FontSize="24"
+                            VerticalAlignment="Center"
+                            Margin="0,0,8,0"/>
+                    <StackPanel VerticalAlignment="Center">
+                        <TextBlock Text="{Binding Source={x:Static loc:Strings.Current}, Path=AppTitle}"
+                                FontSize="15"
+                                FontWeight="SemiBold"
+                                Foreground="White"/>
+                        <TextBlock Text="{Binding Source={x:Static loc:Strings.Current}, Path=AppSubtitle}"
+                                FontSize="10"
+                                Foreground="#FFE0B2"/>
+                    </StackPanel>
+                </StackPanel>
+
+                <Button DockPanel.Dock="Right"
+                        x:Name="BtnLang"
+                        Content="PL / EN"
+                        Click="BtnLang_Click"
+                        Margin="0,0,8,0"
+                        Padding="10,4"
+                        Background="Transparent"
+                        Foreground="White"
+                        BorderBrush="#80FFFFFF"/>
+                <Button DockPanel.Dock="Right"
+                        x:Name="BtnAbout"
+                        Content="ℹ"
+                        ToolTip="{Binding Source={x:Static loc:Strings.Current}, Path=AboutTitle}"
+                        Click="BtnAbout_Click"
+                        Margin="0,0,4,0"
+                        Padding="10,4"
+                        FontSize="14"
+                        Background="Transparent"
+                        Foreground="White"
+                        BorderBrush="#80FFFFFF"/>
+
+                <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center">
+                    <Button Content="{Binding Source={x:Static loc:Strings.Current}, Path=BtnLoadStl}"
+                            Command="{Binding LoadStlCommand}"
+                            Margin="4,0"
+                            Padding="12,6"
+                            Background="White"
+                            Foreground="{StaticResource ChomikDarkBrush}"/>
+                    <Button Content="{Binding Source={x:Static loc:Strings.Current}, Path=BtnGenerate}"
+                            Command="{Binding GenerateModelCommand}"
+                            Margin="4,0"
+                            Padding="12,6"
+                            Background="{StaticResource ChomikDarkBrush}"
+                            Foreground="White"/>
+                    <Button Content="{Binding Source={x:Static loc:Strings.Current}, Path=BtnTestSocket}"
+                            Command="{Binding GenerateTestSocketCommand}"
+                            Margin="4,0"
+                            Padding="12,6"
+                            Background="White"
+                            Foreground="{StaticResource ChomikDarkBrush}"/>
+                    <Separator Width="1"
+                            Background="#80FFFFFF"
+                            Margin="12,2"/>
+                    <ComboBox ItemsSource="{Binding ExportFormats}"
+                            SelectedIndex="{Binding SelectedFormatIndex}"
+                            Width="115"
+                            Margin="4,0"/>
+                    <Button Content="{Binding Source={x:Static loc:Strings.Current}, Path=BtnExport}"
+                            Command="{Binding ExportModelCommand}"
+                            Margin="4,0"
+                            Padding="12,6"
+                            Background="{StaticResource ChomikGreenBrush}"
+                            Foreground="White"/>
+                    <Separator Width="1"
+                            Background="#80FFFFFF"
+                            Margin="12,2"/>
+                    <Button Content="{Binding Source={x:Static loc:Strings.Current}, Path=BtnSavePreset}"
+                            Command="{Binding SavePresetCommand}"
+                            Margin="4,0"
+                            Padding="8,6"
+                            Background="Transparent"
+                            Foreground="White"
+                            BorderBrush="#80FFFFFF"/>
+                    <Button Content="{Binding Source={x:Static loc:Strings.Current}, Path=BtnLoadPreset}"
+                            Command="{Binding LoadPresetCommand}"
+                            Margin="4,0"
+                            Padding="8,6"
+                            Background="Transparent"
+                            Foreground="White"
+                            BorderBrush="#80FFFFFF"/>
+                </StackPanel>
+            </DockPanel>
+        </Border>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="320"
+                        MinWidth="260"/>
+                <ColumnDefinition Width="4"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="0"
+                    Background="{DynamicResource SystemControlBackgroundAltMediumBrush}"
+                    BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}"
+                    BorderThickness="0,0,1,0">
+                <DockPanel>
+                    <Border DockPanel.Dock="Top"
+                            Padding="12,10"
+                            Background="{DynamicResource SystemControlBackgroundChromeMediumBrush}"
+                            BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}"
+                            BorderThickness="0,0,0,1">
+                        <StackPanel>
+                            <TextBlock Text="{Binding Source={x:Static loc:Strings.Current}, Path=LblSpecies}"
+                                    FontSize="11"
+                                    Foreground="{DynamicResource SystemControlForegroundBaseMediumBrush}"
+                                    Margin="0,0,0,4"/>
+                            <ComboBox x:Name="SpeciesCombo"
+                                    ItemsSource="{Binding AllSpecies}"
+                                    SelectedValuePath="Id"
+                                    SelectedValue="{Binding SelectedSpecies}"
+                                    HorizontalAlignment="Stretch">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding DisplayName}"/>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                        </StackPanel>
+                    </Border>
+
+                    <Border DockPanel.Dock="Top"
+                            Padding="12,6"
+                            Background="#E3F2FD"
+                            Visibility="{Binding HasHealthDetail, Converter={StaticResource BoolToVis}}">
+                        <TextBlock Text="{Binding HealthDetail}"
+                                TextWrapping="Wrap"
+                                FontSize="11"
+                                Foreground="#1565C0"/>
+                    </Border>
+                    <Border DockPanel.Dock="Top"
+                            Padding="12,8"
+                            Background="#FFF3E0"
+                            Visibility="{Binding HasHealthWarning, Converter={StaticResource BoolToVis}}">
+                        <TextBlock Text="{Binding HealthWarning}"
+                                TextWrapping="Wrap"
+                                FontSize="12"
+                                Foreground="#E65100"/>
+                    </Border>
+                    <Border DockPanel.Dock="Top"
+                            Padding="12,8"
+                            Background="#FFEBEE"
+                            Visibility="{Binding HasPrinterWarning, Converter={StaticResource BoolToVis}}">
+                        <TextBlock Text="{Binding PrinterWarning}"
+                                TextWrapping="Wrap"
+                                FontSize="12"
+                                Foreground="#C62828"/>
+                    </Border>
+
+                    <Border DockPanel.Dock="Bottom"
+                            Padding="12,8"
+                            Background="{DynamicResource SystemControlBackgroundChromeMediumBrush}"
+                            BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}"
+                            BorderThickness="0,1,0,0">
+                        <TextBlock Text="{Binding MeshInfo}"
+                                FontFamily="Consolas"
+                                FontSize="11"
+                                Foreground="{DynamicResource SystemControlForegroundBaseMediumBrush}"/>
+                    </Border>
+
+                    <CheckBox DockPanel.Dock="Bottom"
+                            Content="{Binding Source={x:Static loc:Strings.Current}, Path=ShowWheel}"
+                            IsChecked="{Binding ShowWheel}"
+                            Margin="12,6"/>
+                    <CheckBox DockPanel.Dock="Bottom"
+                            Content="{Binding Source={x:Static loc:Strings.Current}, Path=ShowBase}"
+                            IsChecked="{Binding ShowBase}"
+                            Margin="12,6"/>
+
+                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                        <StackPanel Margin="0">
+
+                            <!-- 1. PRINTER -->
+                            <Expander Header="{Binding Source={x:Static loc:Strings.Current}, Path=SecPrinter}"
+                                    IsExpanded="False"
+                                    Margin="0,0,0,2">
+                                <StackPanel Margin="12,8">
+                                    <TextBlock Text="{Binding Source={x:Static loc:Strings.Current}, Path=LblBedX}"
+                                            FontSize="11"
+                                            Foreground="{DynamicResource SystemControlForegroundBaseMediumBrush}"
+                                            Margin="0,0,0,4"/>
+                                    <ui:NumberBox Value="{Binding BedXMm, Mode=TwoWay}"
+                                            Minimum="100"
+                                            Maximum="1000"
+                                            SmallChange="5"
+                                            Margin="0,0,0,10"
+                                            SpinButtonPlacementMode="Inline"/>
+
+                                    <TextBlock Text="{Binding Source={x:Static loc:Strings.Current}, Path=LblBedY}"
+                                            FontSize="11"
+                                            Foreground="{DynamicResource SystemControlForegroundBaseMediumBrush}"
+                                            Margin="0,0,0,4"/>
+                                    <ui:NumberBox Value="{Binding BedYMm, Mode=TwoWay}"
+                                            Minimum="100"
+                                            Maximum="1000"
+                                            SmallChange="5"
+                                            Margin="0,0,0,10"
+                                            SpinButtonPlacementMode="Inline"/>
+
+                                    <TextBlock Text="{Binding Source={x:Static loc:Strings.Current}, Path=LblBedZ}"
+                                            FontSize="11"
+                                            Foreground="{DynamicResource SystemControlForegroundBaseMediumBrush}"
+                                            Margin="0,0,0,4"/>
+                                    <ui:NumberBox Value="{Binding BedZMm, Mode=TwoWay}"
+                                            Minimum="50"
+                                            Maximum="1000"
+                                            SmallChange="5"
+                                            Margin="0,0,0,10"
+                                            SpinButtonPlacementMode="Inline"/>
+
+                                    <TextBlock Text="{Binding Source={x:Static loc:Strings.Current}, Path=LblMaterial}"
+                                            FontSize="11"
+                                            Foreground="{DynamicResource SystemControlForegroundBaseMediumBrush}"
+                                            Margin="0,0,0,4"/>
+                                    <ComboBox ItemsSource="{Binding Materials}"
+                                            SelectedIndex="0"
+                                            HorizontalAlignment="Stretch"/>
+
+                                    <Border Margin="0,10,0,0"
+                                            Background="#E8F5E9"
+                                            CornerRadius="6"
+                                            Padding="10,8">
+                                        <TextBlock TextWrapping="Wrap"
+                                                FontSize="11"
+                                                Foreground="#2E7D32"
+                                                Text="{Binding Source={x:Static loc:Strings.Current}, Path=MaterialHint}"/>
+                                    </Border>
+                                </StackPanel>
+                            </Expander>
+
+                            <!-- 2. BASE GENERATOR -->
+                            <Expander Header="{Binding Source={x:Static loc:Strings.Current}, Path=SecBaseGenerator}"
+                                    IsExpanded="False"
+                                    Margin="0,0,0,2">
+                                <StackPanel Margin="12,8">
+                                    <TextBlock Text="{Binding Source={x:Static loc:Strings.Current}, Path=LblBaseType}"
+                                            FontSize="11"
+                                            Foreground="{DynamicResource SystemControlForegroundBaseMediumBrush}"
+                                            Margin="0,0,0,4"/>
+                                    <ComboBox SelectedIndex="{Binding BaseTypeIndex, Mode=TwoWay}"
+                                            HorizontalAlignment="Stretch"
+                                            Margin="0,0,0,10">
+                                        <ComboBoxItem Content="{Binding Source={x:Static loc:Strings.Current}, Path=BaseTypeBearingTrack}"/>
+                                        <ComboBoxItem Content="{Binding Source={x:Static loc:Strings.Current}, Path=BaseTypeHanging}"/>
+                                    </ComboBox>
+
+                                    <!-- HANGING ON SCREW: width + length drive wheel -->
+                                    <StackPanel Visibility="{Binding IsHangingScrew, Converter={StaticResource BoolToVis}}">
+                                        <TextBlock Text="{Binding Source={x:Static loc:Strings.Current}, Path=LblBaseWidth}"
+                                                FontSize="11"
+                                                Foreground="{DynamicResource SystemControlForegroundBaseMediumBrush}"
+                                                Margin="0,0,0,4"/>
+                                        <ui:NumberBox Value="{Binding BaseWidthMm, Mode=TwoWay}"
+                                                Minimum="120"
+                                                Maximum="600"
+                                                SmallChange="5"
+                                                Margin="0,0,0,10"
+                                                SpinButtonPlacementMode="Inline"/>
+
+                                        <TextBlock Text="{Binding Source={x:Static loc:Strings.Current}, Path=LblBaseLength}"
+                                                FontSize="11"
+                                                Foreground="{DynamicResource SystemControlForegroundBaseMediumBrush}"
+                                                Margin="0,0,0,4"/>
+                                        <ui:NumberBox Value="{Binding BaseLengthMm, Mode=TwoWay}"
+                                                Minimum="60"
+                                                Maximum="400"
+                                                SmallChange="5"
+                                                Margin="0,0,0,10"
+                                                SpinButtonPlacementMode="Inline"/>
+                                    </StackPanel>
+
+                                    <!-- BEARING TRACK: bearing → count → radius → vslot → wheel width -->
+                                    <StackPanel Visibility="{Binding IsBearingTrack, Converter={StaticResource BoolToVis}}">
+                                        <TextBlock Text="{Binding Source={x:Static loc:Strings.Current}, Path=LblBearing}"
+                                                FontSize="11"
+                                                Foreground="{DynamicResource SystemControlForegroundBaseMediumBrush}"
+                                                Margin="0,0,0,4"/>
+                                        <ComboBox ItemsSource="{Binding AllBearings}"
+                                                SelectedValuePath="Code"
+                                                SelectedValue="{Binding BaseParams.BearingCode, Mode=TwoWay}"
+                                                HorizontalAlignment="Stretch"
+                                                Margin="0,0,0,10">
+                                            <ComboBox.ItemTemplate>
+                                                <DataTemplate>
+                                                    <StackPanel>
+                                                        <TextBlock FontWeight="SemiBold"
+                                                                Text="{Binding Code}"/>
+                                                        <TextBlock FontSize="11"
+                                                                Foreground="{DynamicResource SystemControlForegroundBaseMediumBrush}">
+                                                            <TextBlock.Text>
+                                                                <MultiBinding StringFormat="OD {0}mm / ID {1}mm / B {2}mm">
+                                                                    <Binding Path="OuterDiamMm"/>
+                                                                    <Binding Path="InnerDiamMm"/>
+                                                                    <Binding Path="WidthMm"/>
+                                                                </MultiBinding>
+                                                            </TextBlock.Text>
+                                                        </TextBlock>
+                                                        <TextBlock FontSize="11"
+                                                                Text="{Binding Notes}"
+                                                                Foreground="{DynamicResource SystemControlForegroundBaseMediumBrush}"/>
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </ComboBox.ItemTemplate>
+                                        </ComboBox>
+
+                                        <TextBlock Text="{Binding Source={x:Static loc:Strings.Current}, Path=LblBearingCount}"
+                                                FontSize="11"
+                                                Foreground="{DynamicResource SystemControlForegroundBaseMediumBrush}"
+                                                Margin="0,0,0,4"/>
+                                        <ui:NumberBox Value="{Binding BaseParams.BearingCount, Mode=TwoWay}"
+                                                Minimum="1"
+                                                Maximum="6"
+                                                SmallChange="1"
+                                                Margin="0,0,0,10"
+                                                SpinButtonPlacementMode="Inline"/>
+
+                                        <TextBlock Text="{Binding Source={x:Static loc:Strings.Current}, Path=LblBearingRadius}"
+                                                FontSize="11"
+                                                Foreground="{DynamicResource SystemControlForegroundBaseMediumBrush}"
+                                                Margin="0,0,0,4"/>
+                                        <ui:NumberBox Value="{Binding BaseParams.BearingRadiusMm, Mode=TwoWay}"
+                                                Minimum="30"
+                                                Maximum="250"
+                                                SmallChange="2.5"
+                                                Margin="0,0,0,10"
+                                                SpinButtonPlacementMode="Inline"/>
+
+                                        <TextBlock Text="{Binding Source={x:Static loc:Strings.Current}, Path=LblTolerance}"
+                                                FontSize="11"
+                                                Foreground="{DynamicResource SystemControlForegroundBaseMediumBrush}"
+                                                Margin="0,0,0,4"/>
+                                        <ui:NumberBox Value="{Binding SocketToleranceMm, Mode=TwoWay}"
+                                                Minimum="0"
+                                                Maximum="0.5"
+                                                SmallChange="0.1"
+                                                Margin="0,0,0,10"
+                                                SpinButtonPlacementMode="Inline">
+                                            <ui:NumberBox.NumberFormatter>
+                                                <design:OneDecimalFormatter/>
+                                            </ui:NumberBox.NumberFormatter>
+                                        </ui:NumberBox>
+
+                                        <CheckBox Content="{Binding Source={x:Static loc:Strings.Current}, Path=LblSnapFitCover}"
+                                                Margin="0,4,0,12"
+                                                IsChecked="{Binding BaseParams.SnapFitCover, Mode=TwoWay}"/>
+
+                                        <Separator Margin="0,4,0,8"/>
+                                        <CheckBox Content="{Binding Source={x:Static loc:Strings.Current}, Path=LblVSlot}"
+                                                FontWeight="SemiBold"
+                                                IsChecked="{Binding BaseParams.VSlotEnabled, Mode=TwoWay}"
+                                                Margin="0,0,0,8"/>
+                                        <StackPanel Visibility="{Binding BaseParams.VSlotEnabled, Converter={StaticResource BoolToVis}}">
+                                            <TextBlock Text="{Binding Source={x:Static loc:Strings.Current}, Path=LblVSlotType}"
+                                                    FontSize="11"
+                                                    Foreground="{DynamicResource SystemControlForegroundBaseMediumBrush}"
+                                                    Margin="0,0,0,4"/>
+                                            <ComboBox SelectedIndex="{Binding VSlotTypeIndex, Mode=TwoWay}"
+                                                    HorizontalAlignment="Stretch"
+                                                    Margin="0,0,0,10">
+                                                <ComboBoxItem Content="{Binding Source={x:Static loc:Strings.Current}, Path=VSlot2020}"/>
+                                                <ComboBoxItem Content="{Binding Source={x:Static loc:Strings.Current}, Path=VSlot2040}"/>
+                                                <ComboBoxItem Content="{Binding Source={x:Static loc:Strings.Current}, Path=VSlotCustom}"/>
+                                            </ComboBox>
+
+                                            <TextBlock Text="{Binding Source={x:Static loc:Strings.Current}, Path=VSlotHint}"
+                                                    FontSize="11"
+                                                    Foreground="{StaticResource ChomikOrangeBrush}"
+                                                    TextWrapping="Wrap"
+                                                    Margin="0,0,0,8"/>
+                                        </StackPanel>
+
+                                        <TextBlock Text="{Binding Source={x:Static loc:Strings.Current}, Path=LblWheelWidthOnTrack}"
+                                                FontSize="11"
+                                                Foreground="{DynamicResource SystemControlForegroundBaseMediumBrush}"
+                                                Margin="0,0,0,4"/>
+                                        <ui:NumberBox Value="{Binding WheelParams.TrackWidthMm, Mode=TwoWay}"
+                                                Minimum="30"
+                                                Maximum="150"
+                                                SmallChange="5"
+                                                Margin="0,0,0,10"
+                                                SpinButtonPlacementMode="Inline"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Expander>
+
+                            <!-- 3. WHEEL -->
+                            <Expander Header="{Binding Source={x:Static loc:Strings.Current}, Path=SecWheel}"
+                                    IsExpanded="False"
+                                    Margin="0,0,0,2">
+                                <StackPanel Margin="12,8">
+                                    <TextBlock Text="{Binding Source={x:Static loc:Strings.Current}, Path=LblDiameter}"
+                                            FontSize="11"
+                                            Foreground="{DynamicResource SystemControlForegroundBaseMediumBrush}"
+                                            Margin="0,0,0,4"/>
+                                    <ui:NumberBox Value="{Binding WheelParams.DiameterMm, Mode=TwoWay}"
+                                            Minimum="100"
+                                            Maximum="500"
+                                            SmallChange="10"
+                                            Margin="0,0,0,10"
+                                            SpinButtonPlacementMode="Inline"/>
+
+                                    <TextBlock Text="{Binding Source={x:Static loc:Strings.Current}, Path=LblTrackWidth}"
+                                            FontSize="11"
+                                            Foreground="{DynamicResource SystemControlForegroundBaseMediumBrush}"
+                                            Margin="0,0,0,4"/>
+                                    <ui:NumberBox Value="{Binding WheelParams.TrackWidthMm, Mode=TwoWay}"
+                                            Minimum="30"
+                                            Maximum="150"
+                                            SmallChange="5"
+                                            Margin="0,0,0,10"
+                                            SpinButtonPlacementMode="Inline"/>
+
+                                    <TextBlock Text="{Binding Source={x:Static loc:Strings.Current}, Path=LblWallThickness}"
+                                            FontSize="11"
+                                            Foreground="{DynamicResource SystemControlForegroundBaseMediumBrush}"
+                                            Margin="0,0,0,4"/>
+                                    <ui:NumberBox Value="{Binding WheelParams.WallThicknessMm, Mode=TwoWay}"
+                                            Minimum="1.5"
+                                            Maximum="8"
+                                            SmallChange="0.5"
+                                            Margin="0,0,0,10"
+                                            SpinButtonPlacementMode="Inline"/>
+
+                                    <TextBlock Text="{Binding Source={x:Static loc:Strings.Current}, Path=LblSurface}"
+                                            FontSize="11"
+                                            Foreground="{DynamicResource SystemControlForegroundBaseMediumBrush}"
+                                            Margin="0,0,0,4"/>
+                                    <ComboBox SelectedIndex="{Binding SurfaceTypeIndex, Mode=TwoWay}"
+                                            HorizontalAlignment="Stretch"
+                                            Margin="0,0,0,10">
+                                        <ComboBoxItem Content="{Binding Source={x:Static loc:Strings.Current}, Path=SurfaceSmooth}"/>
+                                        <ComboBoxItem Content="{Binding Source={x:Static loc:Strings.Current}, Path=SurfaceRibbed}"/>
+                                        <ComboBoxItem Content="{Binding Source={x:Static loc:Strings.Current}, Path=SurfaceGrid}"/>
+                                    </ComboBox>
+
+                                    <TextBlock Text="{Binding Source={x:Static loc:Strings.Current}, Path=LblGrooveAngle}"
+                                            FontSize="11"
+                                            Foreground="{DynamicResource SystemControlForegroundBaseMediumBrush}"
+                                            Margin="0,0,0,4"/>
+                                    <ui:NumberBox Value="{Binding WheelParams.GrooveAngleDeg, Mode=TwoWay}"
+                                            Minimum="15"
+                                            Maximum="75"
+                                            SmallChange="5"
+                                            Margin="0,0,0,10"
+                                            SpinButtonPlacementMode="Inline"/>
+
+                                    <TextBlock Text="{Binding Source={x:Static loc:Strings.Current}, Path=LblSegments}"
+                                            FontSize="11"
+                                            Foreground="{DynamicResource SystemControlForegroundBaseMediumBrush}"
+                                            Margin="0,0,0,4"/>
+                                    <ui:NumberBox Value="{Binding WheelParams.Segments, Mode=TwoWay}"
+                                            Minimum="48"
+                                            Maximum="720"
+                                            SmallChange="12"
+                                            Margin="0,0,0,10"
+                                            SpinButtonPlacementMode="Inline"/>
+                                </StackPanel>
+                            </Expander>
+                        </StackPanel>
+                    </ScrollViewer>
+                </DockPanel>
+            </Border>
+
+            <GridSplitter Grid.Column="1"
+                    HorizontalAlignment="Stretch"
+                    ResizeDirection="Columns"
+                    Background="{DynamicResource SystemControlForegroundBaseLowBrush}"/>
+
+            <Border Grid.Column="2"
+                    Background="#12121E">
+                <Grid>
+                    <WindowsFormsHost x:Name="RenderHost"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch"/>
+                    <StackPanel VerticalAlignment="Bottom"
+                            HorizontalAlignment="Left"
+                            Margin="12,0,0,12">
+                        <TextBlock Foreground="#60FFFFFF"
+                                FontSize="11"
+                                FontFamily="Consolas"
+                                Text="{Binding Source={x:Static loc:Strings.Current}, Path=CameraHints}"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </Grid>
+
+        <Border Grid.Row="2"
+                Background="{DynamicResource SystemControlBackgroundChromeMediumLowBrush}"
+                BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}"
+                BorderThickness="0,1,0,0"
+                Padding="12,5">
+            <Grid>
+                <TextBlock Text="{Binding StatusText}"
+                        VerticalAlignment="Center"/>
+                <TextBlock HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        FontSize="11"
+                        FontFamily="Consolas"
+                        Foreground="{DynamicResource SystemControlForegroundBaseMediumBrush}"
+                        Text="Uśmiechnięty Chomik v1.0 · .NET 10 · Direct3D11"/>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

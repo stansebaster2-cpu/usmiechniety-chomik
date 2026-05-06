@@ -1,0 +1,133 @@
+{
+    "editor.formatOnSave": true,
+    "editor.rulers": [
+        120
+    ],
+    "editor.tabSize": 4,
+    "editor.insertSpaces": true,
+    "editor.bracketPairColorization.enabled": true,
+    "editor.guides.bracketPairs": "active",
+    "editor.suggest.preview": true,
+    "files.encoding": "utf8",
+    "files.eol": "\r\n",
+    "files.trimTrailingWhitespace": true,
+    "dotnet.defaultSolution": "UsmiechnietyCHomik.sln",
+    "csharp.semanticHighlighting.enabled": true,
+    "omnisharp.enableRoslynAnalyzers": true,
+    "omnisharp.enableEditorConfigSupport": true,
+    "editor.inlayHints.enabled": "on",
+    "files.watcherExclude": {
+        "**/bin/**": true,
+        "**/obj/**": true,
+        "**/logs/**": true,
+        "**/.git/**": true
+    },
+    "files.exclude": {
+        "**/bin": true,
+        "**/obj": true
+    },
+    "search.exclude": {
+        "**/bin": true,
+        "**/obj": true,
+        "**/logs": true
+    },
+    "debug.openDebug": "openOnDebugBreak",
+    "debug.console.wordWrap": false,
+    "chomik.printer.bedSizeX_mm": 235,
+    "chomik.printer.bedSizeY_mm": 235,
+    "chomik.printer.bedSizeZ_mm": 250,
+    "chomik.printer.nozzleDiameter_mm": 0.4,
+    "chomik.printer.defaultMaterial": "PETG",
+    "chomik.printer.defaultLayerHeight_mm": 0.2,
+    "chomik.printer.firstLayerHeight_mm": 0.28,
+    "chomik.wheel.diameterMin_mm": 200,
+    "chomik.wheel.diameterMax_mm": 300,
+    "chomik.wheel.diameterStep_mm": 5,
+    "chomik.wheel.diameterDefault_mm": 235,
+    "chomik.wheel.trackWidthMin_mm": 55,
+    "chomik.wheel.trackWidthMax_mm": 80,
+    "chomik.wheel.trackWidthDefault_mm": 60,
+    "chomik.wheel.vGrooveAngleMin_deg": 30,
+    "chomik.wheel.vGrooveAngleMax_deg": 60,
+    "chomik.wheel.vGrooveAngleDefault_deg": 45,
+    "chomik.wheel.textures": [
+        "grid",
+        "smooth",
+        "ribbed",
+        "hex"
+    ],
+    "chomik.wheel.defaultTexture": "grid",
+    "chomik.health.minSafeDiameter_mm": 200,
+    "chomik.health.warnBelowDiameter_mm": 210,
+    "chomik.health.optimalSpeedMin_kmh": 1.0,
+    "chomik.health.optimalSpeedMax_kmh": 3.0,
+    "chomik.health.dailyDistanceRecommended_km": 6.5,
+    "chomik.bearings.catalog": [
+        {
+            "id": "624ZZ",
+            "outerDiameter_mm": 13,
+            "width_mm": 5,
+            "boreDiameter_mm": 4,
+            "shieldedBothSides": true,
+            "maxRPM": 30000,
+            "notes": "Default - wheels < 250 mm"
+        },
+        {
+            "id": "625ZZ",
+            "outerDiameter_mm": 16,
+            "width_mm": 5,
+            "boreDiameter_mm": 5,
+            "shieldedBothSides": true,
+            "maxRPM": 26000,
+            "notes": "Wheels 220-270 mm"
+        },
+        {
+            "id": "626ZZ",
+            "outerDiameter_mm": 19,
+            "width_mm": 6,
+            "boreDiameter_mm": 6,
+            "shieldedBothSides": true,
+            "maxRPM": 22000,
+            "notes": "Wheels 250-300 mm"
+        },
+        {
+            "id": "MR84ZZ",
+            "outerDiameter_mm": 8,
+            "width_mm": 4,
+            "boreDiameter_mm": 4,
+            "shieldedBothSides": true,
+            "maxRPM": 40000,
+            "notes": "Ultra-small wheels < 200 mm"
+        },
+        {
+            "id": "608ZZ",
+            "outerDiameter_mm": 22,
+            "width_mm": 7,
+            "boreDiameter_mm": 8,
+            "shieldedBothSides": true,
+            "maxRPM": 18000,
+            "notes": "Heavy wheels >= 280 mm"
+        }
+    ],
+    "chomik.base.types": [
+        "floor_stand",
+        "cage_hook",
+        "magnetic_clip"
+    ],
+    "chomik.base.defaultType": "floor_stand",
+    "chomik.base.hookWireMax_mm": 6,
+    "chomik.base.hookWireMin_mm": 3,
+    "chomik.base.standHeightMin_mm": 80,
+    "chomik.base.standHeightMax_mm": 160,
+    "chomik.base.bearingRadiusMultiplier": 1.05,
+    "chomik.base.screwless": true,
+    "chomik.base.snapFitOverlap_mm": 0.4,
+    "chomik.openscad.fn": 200,
+    "chomik.openscad.testFn": 64,
+    "chomik.openscad.exportFormat": "stl",
+    "chomik.openscad.autoExportOnRender": false,
+    "dotnet.formatting.organizeImportsOnFormat": true,
+    "cSpell.words": [
+        "Kolowrotek"
+    ]
+}

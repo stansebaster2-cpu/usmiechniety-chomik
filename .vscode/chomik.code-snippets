@@ -1,0 +1,50 @@
+{
+    "ChomikWheel: nowe kolo": {
+        "scope": "csharp",
+        "prefix": "chomik-wheel",
+        "description": "Utworz WheelParameters z walidacja zdrowotna",
+        "body": [
+            "var wheelParams = new WheelParameters",
+            "{",
+            "    DiameterMm        = ${1:235},",
+            "    TrackWidthMm      = ${2:60},",
+            "    VGrooveAngleDeg   = ${3:45},",
+            "    Texture           = WheelTexture.${4|Grid,Smooth,Ribbed,Hex|},",
+            "    Material          = PrintMaterial.${5|PETG,PLA,ASA|}",
+            "};",
+            "",
+            "WheelHealthValidator.Check(wheelParams);",
+            "var stl = WheelGenerator.Generate(wheelParams);"
+        ]
+    },
+    "ChomikBearing: dobierz lozysko": {
+        "scope": "csharp",
+        "prefix": "chomik-bearing",
+        "description": "Automatyczny dobor lozyska",
+        "body": [
+            "var bearing = BearingSelector.Select(new BearingQuery",
+            "{",
+            "    WheelDiameterMm  = ${1:235},",
+            "    HamsterMassGrams = ${2:150},",
+            "    PreferScrewless  = true",
+            "});",
+            "// bearing.Id -> e.g. \"624ZZ\""
+        ]
+    },
+    "ChomikBase: generuj podstawe": {
+        "scope": "csharp",
+        "prefix": "chomik-base",
+        "description": "Generuj parametry podstawy do kola",
+        "body": [
+            "var baseParams = BaseDesigner.Design(new BaseQuery",
+            "{",
+            "    WheelDiameterMm = ${1:235},",
+            "    Bearing         = bearing,",
+            "    MountType       = MountType.${2|FloorStand,CageHook,MagneticClip|},",
+            "    StandHeightMm   = ${3:120},",
+            "    HookWireMm      = ${4:4},",
+            "    Screwless       = true",
+            "});"
+        ]
+    }
+}

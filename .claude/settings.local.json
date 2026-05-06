@@ -1,0 +1,22 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(grep -E \"\\\\.\\(txt|md|xaml\\)$\")",
+      "Bash(dotnet build *)",
+      "Bash(not exist *)",
+      "Bash(code --version)",
+      "Bash(tasklist)",
+      "Read(//c/Users/stans/AppData/Roaming/Code/logs/**)",
+      "Bash(python -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\('oauthAccount:', bool\\(d.get\\('oauthAccount'\\)\\)\\); print\\('primaryApiKey:', bool\\(d.get\\('primaryApiKey'\\)\\)\\)\")",
+      "Bash(python3 -c ' *)",
+      "Bash(python -c ' *)",
+      "PowerShell($content = Get-Content \"C:\\\\Users\\\\stans\\\\.claude.json\" -Raw -Encoding UTF8; Write-Host \"Rozmiar: $\\($content.Length\\) znaków\"; try { $d = $content | ConvertFrom-Json; Write-Host \"oauthAccount: $\\($null -ne $d.oauthAccount\\)\"; Write-Host \"primaryApiKey: $\\($null -ne $d.primaryApiKey -and $d.primaryApiKey -ne ''\\)\"; } catch { Write-Host \"Błąd JSON: $_\"; Write-Host \"Pierwsze 300 znaków: $\\($content.Substring\\(0, [Math]::Min\\(300, $content.Length\\)\\)\\)\" })",
+      "PowerShell($env:ANTHROPIC_API_KEY; [System.Environment]::GetEnvironmentVariable\\(\"ANTHROPIC_API_KEY\", \"User\"\\); [System.Environment]::GetEnvironmentVariable\\(\"ANTHROPIC_API_KEY\", \"Machine\"\\))",
+      "Bash(claude auth *)",
+      "PowerShell(Head -20 2>$null)",
+      "Read(//tmp/**)",
+      "Bash(dotnet run *)",
+      "Bash(start \"\" \"ChomikApp\\\\bin\\\\Debug\\\\net10.0-windows\\\\UsmiechnietyCHomik.exe\")"
+    ]
+  }
+}

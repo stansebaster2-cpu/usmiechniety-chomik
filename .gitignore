@@ -1,0 +1,25 @@
+﻿# Build output
+**/bin/
+**/obj/
+publish/
+
+# User-specific VS / Rider files
+.vs/
+*.user
+*.suo
+*.userprefs
+*.DotSettings.user
+
+# Logs
+*.log
+logs/
+
+# Export output
+exports/*.stl
+exports/*.obj
+exports/*.ply
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini

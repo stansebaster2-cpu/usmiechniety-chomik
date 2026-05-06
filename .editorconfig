@@ -1,0 +1,41 @@
+﻿root = true
+
+[*]
+charset = utf-8
+end_of_line = crlf
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+[*.cs]
+indent_style = space
+indent_size = 4
+# private fields underscore prefix
+dotnet_naming_rule.private_fields.symbols = private_fields
+dotnet_naming_rule.private_fields.style   = prefix_underscore
+dotnet_naming_rule.private_fields.severity = warning
+dotnet_naming_symbols.private_fields.applicable_kinds = field
+dotnet_naming_symbols.private_fields.applicable_accessibilities = private
+dotnet_naming_style.prefix_underscore.required_prefix = _
+dotnet_naming_style.prefix_underscore.capitalization   = camel_case
+csharp_style_var_for_built_in_types = true:suggestion
+csharp_style_var_when_type_is_apparent = true:suggestion
+dotnet_sort_system_directives_first = true
+
+[*.scad]
+indent_style = space
+indent_size = 4
+
+[*.xaml]
+indent_style = space
+indent_size = 4
+
+[*.{json,csproj,props,targets}]
+indent_style = space
+indent_size = 2
+
+[*.{ps1,psm1}]
+indent_style = space
+indent_size = 4
+
+[Makefile]
+indent_style = tab
