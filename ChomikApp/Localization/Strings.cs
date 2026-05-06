@@ -108,7 +108,7 @@ public class Strings : INotifyPropertyChanged
         "Program jest w pełni otwartoźródłowy i bezpłatny. Możesz go swobodnie używać, modyfikować i dystrybuować — również w celach komercyjnych — pod warunkiem zachowania informacji o licencji i autorze.\n\nProgram powstał z troski o dobrostan chomików i z przekonania, że odpowiednio duże, dobrze zaprojektowane koło może realnie wydłużyć życie i poprawić zdrowie kręgosłupa Twojego zwierzęcia. Budujemy świadomość — dobre koło to nie luksus, to potrzeba każdego chomika.\n\nCopyright © 2026 Sebastian Stańczykowski",
         "This software is fully open-source and free. You may freely use, modify and distribute it — including for commercial purposes — as long as the license and author notice is preserved.\n\nThis program was created out of care for hamster welfare and the belief that a properly sized, well-designed wheel can genuinely extend your hamster's life and protect its spine health. We are building awareness — a good wheel is not a luxury, it is every hamster's need.\n\nCopyright © 2026 Sebastian Stańczykowski");
     public string AboutGithubLabel   => T("Kod źródłowy (GitHub)", "Source code (GitHub)");
-    public string AboutGithubUrl     => "https://github.com/stansebaster/usmiechniety-chomik";
+    public string AboutGithubUrl     => "https://github.com/stansebaster2-cpu/usmiechniety-chomik";
     public string AboutBuyMeACoffee  => T("Wesprzyj projekt", "Support the project");
     public string AboutBuyMeACoffeeUrl => "https://buymeacoffee.com/stansebaster";
     public string AboutPhotoCaption  => T("Mój chomik 🐹", "My hamster 🐹");
