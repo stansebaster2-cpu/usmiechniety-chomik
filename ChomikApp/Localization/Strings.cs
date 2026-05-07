@@ -90,8 +90,17 @@ public class Strings : INotifyPropertyChanged
         "⚠ Model może nie zmieścić się na stole drukarki.",
         "⚠ Model may not fit on the printer bed.");
     public string SurfaceSmooth      => T("Gładka", "Smooth");
-    public string SurfaceRibbed      => T("Żeberkowana (zalecana)", "Ribbed (recommended)");
+    public string SurfaceRibbed      => T("Żeberkowana", "Ribbed");
+    public string SurfaceSteps       => T("Schodki pod łapki (zalecane)", "Paw steps (recommended)");
     public string SurfaceGrid        => T("Siatka", "Grid texture");
+    public string LblStepHeight      => T("Wysokość schodka [mm]", "Step height [mm]");
+    public string LblStepSpacing     => T("Odstęp między schodkami [mm]", "Step spacing [mm]");
+    public string LblDiscPattern     => T("Wzór boku bębna (strona osi)", "Drum side pattern (axle side)");
+    public string DiscPatternFull    => T("Pełny dysk", "Full disc");
+    public string DiscPatternSpoked  => T("Szprychowy", "Spoked");
+    public string DiscPatternCross   => T("Krzyżowy (4 szprychy)", "Cross (4 spokes)");
+    public string LblSpokeCount      => T("Liczba szprych", "Spoke count");
+    public string BtnGenerateBolt    => T("🔩 Generuj śrubę", "🔩 Generate bolt");
     public string MountFreestanding  => T("Wolnostojący (podstawa)", "Freestanding (base)");
     public string MountHanging       => T("Zawieszany (kratka)", "Hanging (cage bars)");
     public string MeshInfoSuffix     => T("trójkątów", "triangles");

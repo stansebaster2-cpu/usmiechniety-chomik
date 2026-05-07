@@ -9,6 +9,7 @@ using ChomikApp.Localization;
 using ChomikEngine.Data;
 using ChomikEngine.Export;
 using ChomikEngine.Geometry;
+using ChomikEngine.Parameters;
 using ChomikEngine.Models;
 using ChomikEngine.Parameters;
 using Serilog;
@@ -248,6 +249,29 @@ public partial class MainViewModel : ObservableObject
         CurrentMesh = await Task.Run(() => BaseGenerator.CreateTestSocket(BaseParams));
         MeshInfo = $"Test socket — {CurrentMesh?.Triangles.Count:N0} trójkątów";
         StatusText = $"✓ {MeshInfo}";
+    }
+
+    [RelayCommand]
+    public async Task GenerateBoltAsync()
+    {
+        StatusText = Strings.Current.StatusGenerating;
+        try
+        {
+            var (total, threaded) = BoltGenerator.GetDefaultLengths();
+            CurrentMesh = await Task.Run(() => BoltGenerator.CreateBolt(total, threaded));
+            MeshInfo = $"Śruba / Bolt — {CurrentMesh?.Triangles.Count:N0} trójkątów";
+            StatusText = $"✓ {MeshInfo}";
+        }
+        catch (Exception ex)
+        {
+            StatusText = $"Błąd / Error: {ex.Message}";
+        }
+    }
+
+    public int DiscPatternIndex
+    {
+        get => (int)WheelParams.DiscPattern;
+        set { WheelParams.DiscPattern = (DiscPattern)value; OnPropertyChanged(); }
     }
 
     [RelayCommand]

@@ -36,7 +36,12 @@
 
             <!-- Zdjęcie Zosi -->
             <Border CornerRadius="10" ClipToBounds="True"
-                    Height="220" Margin="0,0,0,6">
+                    MaxHeight="320" Margin="0,0,0,6"
+                    MouseWheel="PhotoBorder_MouseWheel"
+                    MouseLeftButtonDown="PhotoBorder_MouseLeftButtonDown"
+                    MouseLeftButtonUp="PhotoBorder_MouseLeftButtonUp"
+                    MouseMove="PhotoBorder_MouseMove"
+                    Cursor="Hand">
                 <Grid>
                     <!-- Placeholder gdy brak zdjęcia -->
                     <Border x:Name="PhotoPlaceholder"
@@ -50,8 +55,16 @@
                     </Border>
                     <!-- Właściwe zdjęcie -->
                     <Image x:Name="ZosiaPhoto"
-                           Stretch="UniformToFill"
-                           Visibility="Collapsed"/>
+                           Stretch="Uniform"
+                           Visibility="Collapsed"
+                           RenderTransformOrigin="0.5,0.5">
+                        <Image.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform x:Name="PhotoScale"/>
+                                <TranslateTransform x:Name="PhotoTranslate"/>
+                            </TransformGroup>
+                        </Image.RenderTransform>
+                    </Image>
                 </Grid>
             </Border>
             <TextBlock x:Name="PhotoCaption"

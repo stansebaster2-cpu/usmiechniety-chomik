@@ -38,6 +38,7 @@
     <Compile Include="Export\PlyExporter.cs" />
     <Compile Include="Export\StlExporter.cs" />
     <Compile Include="Geometry\BaseGenerator.cs" />
+    <Compile Include="Geometry\BoltGenerator.cs" />
     <Compile Include="Geometry\Primitives.cs" />
     <Compile Include="Geometry\StlImporter.cs" />
     <Compile Include="Geometry\WheelGenerator.cs" />

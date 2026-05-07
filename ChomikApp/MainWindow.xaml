@@ -93,6 +93,12 @@
                             Padding="12,6"
                             Background="White"
                             Foreground="{StaticResource ChomikDarkBrush}"/>
+                    <Button Content="{Binding Source={x:Static loc:Strings.Current}, Path=BtnGenerateBolt}"
+                            Command="{Binding GenerateBoltCommand}"
+                            Margin="4,0"
+                            Padding="12,6"
+                            Background="White"
+                            Foreground="{StaticResource ChomikDarkBrush}"/>
                     <Separator Width="1"
                             Background="#80FFFFFF"
                             Margin="12,2"/>
@@ -474,9 +480,47 @@
                                             HorizontalAlignment="Stretch"
                                             Margin="0,0,0,10">
                                         <ComboBoxItem Content="{Binding Source={x:Static loc:Strings.Current}, Path=SurfaceSmooth}"/>
-                                        <ComboBoxItem Content="{Binding Source={x:Static loc:Strings.Current}, Path=SurfaceRibbed}"/>
-                                        <ComboBoxItem Content="{Binding Source={x:Static loc:Strings.Current}, Path=SurfaceGrid}"/>
+                                        <ComboBoxItem Content="{Binding Source={x:Static loc:Strings.Current}, Path=SurfaceSteps}"/>
                                     </ComboBox>
+
+                                    <!-- Step texture params -->
+                                    <TextBlock Text="{Binding Source={x:Static loc:Strings.Current}, Path=LblStepHeight}"
+                                            FontSize="11"
+                                            Foreground="{DynamicResource SystemControlForegroundBaseMediumBrush}"
+                                            Margin="0,0,0,4"/>
+                                    <ui:NumberBox Value="{Binding WheelParams.StepHeightMm, Mode=TwoWay}"
+                                            Minimum="0.4" Maximum="3" SmallChange="0.2"
+                                            Margin="0,0,0,10"
+                                            SpinButtonPlacementMode="Inline"/>
+                                    <TextBlock Text="{Binding Source={x:Static loc:Strings.Current}, Path=LblStepSpacing}"
+                                            FontSize="11"
+                                            Foreground="{DynamicResource SystemControlForegroundBaseMediumBrush}"
+                                            Margin="0,0,0,4"/>
+                                    <ui:NumberBox Value="{Binding WheelParams.StepSpacingMm, Mode=TwoWay}"
+                                            Minimum="3" Maximum="15" SmallChange="1"
+                                            Margin="0,0,0,10"
+                                            SpinButtonPlacementMode="Inline"/>
+
+                                    <!-- Disc pattern (hanging type only) -->
+                                    <TextBlock Text="{Binding Source={x:Static loc:Strings.Current}, Path=LblDiscPattern}"
+                                            FontSize="11"
+                                            Foreground="{DynamicResource SystemControlForegroundBaseMediumBrush}"
+                                            Margin="0,0,0,4"/>
+                                    <ComboBox SelectedIndex="{Binding DiscPatternIndex, Mode=TwoWay}"
+                                            HorizontalAlignment="Stretch"
+                                            Margin="0,0,0,10">
+                                        <ComboBoxItem Content="{Binding Source={x:Static loc:Strings.Current}, Path=DiscPatternFull}"/>
+                                        <ComboBoxItem Content="{Binding Source={x:Static loc:Strings.Current}, Path=DiscPatternSpoked}"/>
+                                        <ComboBoxItem Content="{Binding Source={x:Static loc:Strings.Current}, Path=DiscPatternCross}"/>
+                                    </ComboBox>
+                                    <TextBlock Text="{Binding Source={x:Static loc:Strings.Current}, Path=LblSpokeCount}"
+                                            FontSize="11"
+                                            Foreground="{DynamicResource SystemControlForegroundBaseMediumBrush}"
+                                            Margin="0,0,0,4"/>
+                                    <ui:NumberBox Value="{Binding WheelParams.SpokeCount, Mode=TwoWay}"
+                                            Minimum="3" Maximum="12" SmallChange="1"
+                                            Margin="0,0,0,10"
+                                            SpinButtonPlacementMode="Inline"/>
 
                                     <TextBlock Text="{Binding Source={x:Static loc:Strings.Current}, Path=LblGrooveAngle}"
                                             FontSize="11"

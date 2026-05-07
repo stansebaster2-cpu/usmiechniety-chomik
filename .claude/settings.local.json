@@ -16,7 +16,8 @@
       "PowerShell(Head -20 2>$null)",
       "Read(//tmp/**)",
       "Bash(dotnet run *)",
-      "Bash(start \"\" \"ChomikApp\\\\bin\\\\Debug\\\\net10.0-windows\\\\UsmiechnietyCHomik.exe\")"
+      "Bash(start \"\" \"ChomikApp\\\\bin\\\\Debug\\\\net10.0-windows\\\\UsmiechnietyCHomik.exe\")",
+      "Bash(start \"\" \"C:\\\\Users\\\\stans\\\\kołowrotek\\\\ChomikApp\\\\bin\\\\Debug\\\\UsmiechnietyCHomik.exe\")"
     ]
   }
 }
